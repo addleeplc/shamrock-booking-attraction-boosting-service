@@ -123,6 +123,12 @@ configure(core_module) {
         compile(group: 'com.haulmont.monaco', name: 'monaco-scheduler', version: "$monaco_version")
         compile(group: 'com.haulmont.monaco', name: 'monaco-sql2o', version: "$monaco_version")
         compile(group: 'com.haulmont.monaco', name: 'monaco-unirest', version: "$monaco_version")
+
+        testImplementation 'org.mockito:mockito-core:5.2.0'
+        testImplementation 'org.mockito:mockito-testng:0.5.2'
+        testImplementation 'org.mockito:mockito-inline:5.2.0'
+        testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.30'
+
     }
 
     task deploy(dependsOn: assemble, type: ShamrockDeployJettyTask) {

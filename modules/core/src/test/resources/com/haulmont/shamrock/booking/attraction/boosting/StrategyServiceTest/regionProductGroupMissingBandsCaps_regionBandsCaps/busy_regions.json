@@ -1,0 +1,23 @@
+[
+  {
+    "region_group_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "product_group_id": "11111111-2222-3333-4444-555555555555",
+    "status": {
+      "code": "BUSY",
+      "state": {
+        "account": {
+          "fully_booked": false,
+          "extra_response_time": "00:12:00"
+        },
+        "cash": {
+          "fully_booked": false,
+          "extra_response_time": "00:12:00"
+        },
+        "priority_grades": [
+          { "grade_code": "P1", "fully_booked": false, "extra_response_time": "00:12:00" },
+          { "grade_code": "P2", "fully_booked": false, "extra_response_time": "00:12:00" }
+        ]
+      }
+    }
+  }
+]

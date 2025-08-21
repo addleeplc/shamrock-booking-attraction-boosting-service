@@ -1,0 +1,36 @@
+{
+  "strategy_type": "flat",
+  "enabled": true,
+  "caps": {
+    "currency": "GBP",
+    "per_day": 200.0,
+    "per_week": 900.0,
+    "per_month": 3000.0
+  },
+  "bands": [
+    {
+      "min_extra_response_time": "00:05:00",
+      "min_booking_priority": 15,
+      "boost": {
+        "start": 5.0,
+        "threshold": 10.0,
+        "step": {
+          "amount": 1.0,
+          "interval_seconds": 600
+        }
+      }
+    },
+    {
+      "min_extra_response_time": "00:10:00",
+      "min_booking_priority": 40,
+      "boost": {
+        "start": 10.0,
+        "threshold": 15.0,
+        "step": {
+          "amount": 1.5,
+          "interval_seconds": 300
+        }
+      }
+    }
+  ]
+}

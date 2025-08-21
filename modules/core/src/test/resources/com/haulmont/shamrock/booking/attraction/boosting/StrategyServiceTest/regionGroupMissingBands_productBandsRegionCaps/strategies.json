@@ -1,0 +1,78 @@
+[
+  {
+    "scope": "default",
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "per_day":   { "value": 200.0 },
+      "per_week":  { "value": 900.0 },
+      "per_month": { "value": 3000.0 }
+    },
+    "bands": {
+      "items": [
+        {
+          "min_extra_response_time": "00:06:00",
+          "boost": {
+            "start": 5.0,
+            "threshold": 10.0,
+            "step": { "amount": 1.0, "interval_seconds": 600 }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "scope": "RG|aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "per_day":   { "value": 150.0 },
+      "per_week":  { "value": 700.0 },
+      "per_month": { "value": 2100.0 }
+    }
+  },
+  {
+    "scope": "PG|11111111-2222-3333-4444-555555555555",
+    "strategy_type": "flat",
+    "enabled": true,
+    "bands": {
+      "items": [
+        {
+          "min_extra_response_time": "00:08:00",
+          "boost": {
+            "start": 4.0,
+            "threshold": 8.0,
+            "step": { "amount": 0.5, "interval_seconds": 600 }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "scope": "PG|22222222-3333-4444-5555-666666666666",
+    "strategy_type": "flat",
+    "enabled": true
+  },
+  {
+    "scope": "PG|33333333-4444-5555-6666-777777777777",
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "per_day":   { "value": 90.0 },
+      "per_week":  { "value": 450.0 },
+      "per_month": { "value": 1400.0 }
+    },
+    "bands": {
+      "items": [
+        {
+          "min_extra_response_time": "00:05:00",
+          "boost": {
+            "start": 6.0,
+            "threshold": 12.0,
+            "step": { "amount": 1.0, "interval_seconds": 300 }
+          }
+        }
+      ]
+    }
+  }
+]

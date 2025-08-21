@@ -1,0 +1,10 @@
+{
+  "strategy_type": "flat",
+  "enabled": true,
+  "caps": {
+    "currency": "GBP",
+    "per_day": 200.0,
+    "per_week": 900.0,
+    "per_month": 3000.0
+  }
+}

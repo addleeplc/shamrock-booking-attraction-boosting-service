@@ -1,0 +1,232 @@
+{
+  "boostStrategy.RG|be8bce1d-22a7-47f9-82f3-780e4d57ca18.PG|3d0d42d4-531b-4f1f-8956-8f44f24126cd": {
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "currency": "GBP",
+      "per_day": 3312.0
+    }
+  },
+  "boostStrategy.RG|cbdabfbb-8c41-4bd2-a874-ee368e132e34.PG|d6735675-747a-47e1-96c1-35b1c6ffb163": {
+    "strategy_type": "flat",
+    "enabled": false,
+    "caps": {
+      "currency": "GBP",
+      "per_day": 200.0,
+      "per_week": 900.0,
+      "per_month": 3000.0
+    },
+    "bands": [
+      {
+        "min_extra_response_time": "00:05:00",
+        "min_booking_priority": 15,
+        "boost": {
+          "start": 5.0,
+          "threshold": 10.0,
+          "step": {
+            "amount": 1.0,
+            "interval_seconds": 600
+          }
+        }
+      },
+      {
+        "min_extra_response_time": "00:10:00",
+        "min_booking_priority": 40,
+        "boost": {
+          "start": 10.0,
+          "threshold": 15.0,
+          "step": {
+            "amount": 1.5,
+            "interval_seconds": 300
+          }
+        }
+      }
+    ]
+  },
+  "boostStrategy.RG|be8bce1d-22a7-47f9-82f3-780e4d57ca18": {
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "currency": "GBP",
+      "per_day": 200.0,
+      "per_week": 931.0
+    },
+    "bands": [
+      {
+        "min_extra_response_time": "12:34:56",
+        "min_booking_priority": 15,
+        "boost": {
+          "start": 5.0,
+          "threshold": 10.0,
+          "step": {
+            "amount": 1.0,
+            "interval_seconds": 600
+          }
+        }
+      },
+      {
+        "min_extra_response_time": "00:10:00",
+        "min_booking_priority": 40,
+        "boost": {
+          "start": 10.0,
+          "threshold": 15.0,
+          "step": {
+            "amount": 1.5,
+            "interval_seconds": 300
+          }
+        }
+      }
+    ]
+  },
+  "boostStrategy.RG|cbdabfbb-8c41-4bd2-a874-ee368e132e34": {
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "currency": "GBP",
+      "per_day": 200.0,
+      "per_week": 900.0,
+      "per_month": 3000.0
+    },
+    "bands": [
+      {
+        "min_extra_response_time": "00:05:00",
+        "min_booking_priority": 15,
+        "boost": {
+          "start": 5.0,
+          "threshold": 10.0,
+          "step": {
+            "amount": 1.0,
+            "interval_seconds": 600
+          }
+        }
+      },
+      {
+        "min_extra_response_time": "00:10:00",
+        "min_booking_priority": 40,
+        "boost": {
+          "start": 10.0,
+          "threshold": 15.0,
+          "step": {
+            "amount": 1.5,
+            "interval_seconds": 300
+          }
+        }
+      }
+    ]
+  },
+  "boostStrategy.PG|3d0d42d4-531b-4f1f-8956-8f44f24126cd": {
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "currency": "GBP",
+      "per_day": 200.0,
+      "per_week": 724.0
+    }
+  },
+  "boostStrategy.PG|d6735675-747a-47e1-96c1-35b1c6ffb163": {
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "currency": "GBP",
+      "per_day": 200.0,
+      "per_week": 900.0,
+      "per_month": 3000.0
+    },
+    "bands": [
+      {
+        "min_extra_response_time": "00:05:00",
+        "min_booking_priority": 15,
+        "boost": {
+          "start": 5.0,
+          "threshold": 10.0,
+          "step": {
+            "amount": 1.0,
+            "interval_seconds": 600
+          }
+        }
+      },
+      {
+        "min_extra_response_time": "00:10:00",
+        "min_booking_priority": 40,
+        "boost": {
+          "start": 10.0,
+          "threshold": 15.0,
+          "step": {
+            "amount": 1.5,
+            "interval_seconds": 300
+          }
+        }
+      }
+    ]
+  },
+  "boostStrategy.PG|c7d973eb-dd7b-409f-8995-c5181909e1e7": {
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "currency": "GBP",
+      "per_day": 200.0,
+      "per_week": 900.0,
+      "per_month": 3000.0
+    },
+    "bands": [
+      {
+        "min_extra_response_time": "00:05:00",
+        "min_booking_priority": 15,
+        "boost": {
+          "start": 5.0,
+          "threshold": 10.0,
+          "step": {
+            "amount": 1.0,
+            "interval_seconds": 600
+          }
+        }
+      },
+      {
+        "min_extra_response_time": "00:10:00",
+        "min_booking_priority": 40,
+        "boost": {
+          "start": 10.0,
+          "threshold": 15.0,
+          "step": {
+            "amount": 1.5,
+            "interval_seconds": 300
+          }
+        }
+      }
+    ]
+  },
+  "boostStrategy": {
+    "strategy_type": "flat",
+    "enabled": true,
+    "caps": {
+      "currency": "GBP",
+      "per_month": 5432.0
+    },
+    "bands": [
+      {
+        "min_extra_response_time": "00:05:00",
+        "min_booking_priority": 15,
+        "boost": {
+          "start": 5.0,
+          "threshold": 10.0,
+          "step": {
+            "amount": 1.0,
+            "interval_seconds": 600
+          }
+        }
+      },
+      {
+        "min_extra_response_time": "00:10:00",
+        "min_booking_priority": 40,
+        "boost": {
+          "start": 10.0,
+          "threshold": 15.0,
+          "step": {
+            "amount": 1.5,
+            "interval_seconds": 300
+          }
+        }
+      }
+    ]
+  }
+}

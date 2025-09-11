@@ -28,7 +28,11 @@ public abstract class AbstractAutoBoostEvaluator implements AutoBoostEvaluator {
         } else if (currentDecision.getBoostValue() >= boostConfiguration.getThreshold()) {
             return convertToValue(boostConfiguration.getThreshold());
         } else if (new Duration(currentDecision.getTs(), now).toStandardSeconds().getSeconds() > boostConfiguration.getStep().getIntervalSeconds()) {
-            return convertToValue(currentDecision.getBoostValue() + boostConfiguration.getStep().getAmount());
+            if(boostConfiguration.getStart() > currentDecision.getBoostValue()) {
+                return convertToValue(boostConfiguration.getStart());
+            } else {
+                return convertToValue(currentDecision.getBoostValue() + boostConfiguration.getStep().getAmount());
+            }
         } else {
             return convertToValue(currentDecision.getBoostValue());
         }

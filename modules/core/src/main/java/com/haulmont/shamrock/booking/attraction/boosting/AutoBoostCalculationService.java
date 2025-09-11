@@ -17,15 +17,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.haulmont.shamrock.booking.attraction.boosting.model.strategy.BoostEvaluatorFactory.getEvaluator;
+import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.comparingLong;
 
 @Component
 public class AutoBoostCalculationService {
-    private static final Comparator<Band> BAND_COMPARATOR =
-            Comparator
-                    .comparingLong((Band b) -> b.getMinExtraResponseTime().toStandardSeconds().getSeconds())
+    private static final Comparator<Band> BAND_COMPARATOR = comparingLong((Band b) -> b.getMinExtraResponseTime().toStandardSeconds().getSeconds())
                     .reversed()
-                    .thenComparingInt(Band::getMinBookingPriority)
-                    .reversed();
+                    .thenComparing(comparingInt(Band::getMinBookingPriority).reversed());
     @Inject
     private Logger log;
     @Inject

@@ -14,17 +14,11 @@ import org.picocontainer.annotations.Inject;
 import org.slf4j.Logger;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.haulmont.shamrock.booking.attraction.boosting.model.strategy.BoostEvaluatorFactory.getEvaluator;
-import static java.util.Comparator.comparingInt;
-import static java.util.Comparator.comparingLong;
 
 @Component
 public class AutoBoostCalculationService {
-    private static final Comparator<Band> BAND_COMPARATOR = comparingLong((Band b) -> b.getMinExtraResponseTime().toStandardSeconds().getSeconds())
-                    .reversed()
-                    .thenComparing(comparingInt(Band::getMinBookingPriority).reversed());
     @Inject
     private Logger log;
     @Inject
@@ -61,10 +55,9 @@ public class AutoBoostCalculationService {
 
         return Optional.empty();
     }
-    //todo sort bands in StrategyService
+
     private Optional<Band> selectBand(List<Band> bands, BookingResponseTime bookingResponseTime) {
-        List<Band> sorted = new ArrayList<>(bands).stream().sorted(BAND_COMPARATOR).collect(Collectors.toList());
-        return sorted.stream()
+        return bands.stream()
                 .filter(it -> bookingResponseTime.getBooking().getPriority() >= it.getMinBookingPriority())
                 .filter(it -> bookingResponseTime.getResponseTime().toStandardSeconds().getSeconds() >= it.getMinExtraResponseTime().toStandardSeconds().getSeconds())
                 .findFirst();

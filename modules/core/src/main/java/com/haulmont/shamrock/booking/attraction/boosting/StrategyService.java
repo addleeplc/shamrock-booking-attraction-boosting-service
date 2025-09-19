@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.haulmont.monaco.config.AppConfig;
 import com.haulmont.monaco.jackson.ObjectReaderWriterFactory;
 import com.haulmont.shamrock.booking.attraction.boosting.config.ServiceConfiguration;
+import com.haulmont.shamrock.booking.attraction.boosting.model.Band;
 import com.haulmont.shamrock.booking.attraction.boosting.model.Cap;
 import com.haulmont.shamrock.booking.attraction.boosting.model.Caps;
 import com.haulmont.shamrock.booking.attraction.boosting.model.Strategy;
@@ -31,6 +32,13 @@ import static java.util.Collections.emptyList;
 
 @Component
 public class StrategyService {
+    private static final Comparator<Band> BAND_COMPARATOR =
+            Comparator
+                    .comparingLong((Band b) -> b.getMinExtraResponseTime().toStandardSeconds().getSeconds())
+                    .reversed()
+                    .thenComparingInt(Band::getMinBookingPriority)
+                    .reversed();
+
     private static final ScopeType[] SCOPE_TYPES_RESOLUTION_SEQUENCE = new ScopeType[]{
             ScopeType.PRODUCT_GROUP,
             ScopeType.REGION_GROUP,
@@ -205,6 +213,8 @@ public class StrategyService {
         } else {
             throw new IllegalArgumentException("Unknown scope type: " + scopeType);
         }
+
+        strategy.getBands().getItems().sort(BAND_COMPARATOR);
     }
 
     //todo copy?

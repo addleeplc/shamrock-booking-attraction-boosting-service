@@ -11,6 +11,7 @@ import com.haulmont.shamrock.booking.attraction.boosting.services.LoyaltyService
 import com.haulmont.shamrock.booking.attraction.boosting.services.dto.booking_cache.Booking;
 import com.haulmont.shamrock.booking.attraction.boosting.services.dto.booking_cache.Customer;
 import com.haulmont.shamrock.booking.attraction.boosting.services.dto.loyalty.PriorityGrade;
+import com.haulmont.shamrock.booking.attraction.boosting.util.BookingUtil;
 import org.picocontainer.annotations.Component;
 import org.picocontainer.annotations.Inject;
 
@@ -22,14 +23,9 @@ public class CustomerGradeService {
     private LoyaltyService loyaltyService;
 
     public String getGrade(Booking booking) {
-        Customer customer = booking.getCustomer();
-        return isB2C(customer.getCode())
-                ? getGradeB2C(customer)
+        return BookingUtil.isB2C(booking)
+                ? getGradeB2C(booking.getCustomer())
                 : getGradeB2B(booking);
-    }
-
-    private boolean isB2C(String customerPid) {
-        return customerPid.startsWith("I|");
     }
 
     private String getGradeB2C(Customer customer) {

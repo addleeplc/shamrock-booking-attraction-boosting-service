@@ -27,6 +27,8 @@ public class Band {
     private int minBookingPriority = -100;
     @JsonProperty("boost_configuration")
     private BoostConfiguration boostConfiguration;
+    @JsonProperty("type")
+    private BandType type;
 
     public UUID getId() {
         return id;
@@ -58,6 +60,14 @@ public class Band {
 
     public void setBoost(BoostConfiguration boostConfiguration) {
         this.boostConfiguration = boostConfiguration;
+    }
+
+    public BandType getType() {
+        return type;
+    }
+
+    public void setType(BandType type) {
+        this.type = type;
     }
 
     @Override

@@ -7,6 +7,7 @@
 package com.haulmont.shamrock.booking.attraction.boosting;
 
 import com.haulmont.shamrock.booking.attraction.boosting.model.*;
+import com.haulmont.shamrock.booking.attraction.boosting.util.BookingUtil;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.picocontainer.annotations.Component;
@@ -31,7 +32,7 @@ public class AutoBoostCalculationService {
     public Optional<AutoBoostDecision> calculate(BookingResponseTime bookingResponseTime, AttractionBoostingContext context, AutoBoostDecision currentDecision) {
         Strategy strategy = context.getStrategy(bookingResponseTime.getResponseTimeSource());
 
-        Optional<Band> optionalNewBand = selectBand(strategy.getBands().getItems(), bookingResponseTime);
+        Optional<Band> optionalNewBand = selectBand(strategy.getBands().getItems(), bookingResponseTime, BookingUtil.isB2C(bookingResponseTime.getBooking()));
         if (optionalNewBand.isEmpty()) return Optional.empty();
 
         Band newBand = optionalNewBand.get();
@@ -56,8 +57,13 @@ public class AutoBoostCalculationService {
         return Optional.empty();
     }
 
-    private Optional<Band> selectBand(List<Band> bands, BookingResponseTime bookingResponseTime) {
+    private Optional<Band> selectBand(List<Band> bands, BookingResponseTime bookingResponseTime, boolean b2C) {
         return bands.stream()
+                .filter(it -> {
+                    if (it.getType() == null) return true;
+
+                    return (it.getType() == BandType.B2C) == b2C;
+                })
                 .filter(it -> bookingResponseTime.getBooking().getPriority() >= it.getMinBookingPriority())
                 .filter(it -> bookingResponseTime.getResponseTime().toStandardSeconds().getSeconds() >= it.getMinExtraResponseTime().toStandardSeconds().getSeconds())
                 .findFirst();

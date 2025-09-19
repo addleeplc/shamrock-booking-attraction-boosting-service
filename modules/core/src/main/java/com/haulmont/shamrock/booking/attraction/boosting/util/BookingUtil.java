@@ -29,4 +29,8 @@ public class BookingUtil {
                 .orElse(null);
     }
 
+    public static boolean isB2C(Booking booking) {
+        return booking.getCustomer().getCode().startsWith("I|");
+    }
+
 }

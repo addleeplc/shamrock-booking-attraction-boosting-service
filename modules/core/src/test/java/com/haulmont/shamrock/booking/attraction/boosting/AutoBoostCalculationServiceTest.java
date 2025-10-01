@@ -51,7 +51,7 @@ public class AutoBoostCalculationServiceTest {
     @BeforeMethod
     public void setUp() throws Exception {
         // Get access to the private selectBand method using reflection
-        selectBandMethod = AutoBoostCalculationService.class.getDeclaredMethod("selectBand", List.class, BookingResponseTime.class);
+        selectBandMethod = AutoBoostCalculationService.class.getDeclaredMethod("selectBand", List.class, BookingResponseTime.class, boolean.class);
         selectBandMethod.setAccessible(true);
     }
 
@@ -62,7 +62,7 @@ public class AutoBoostCalculationServiceTest {
         BookingResponseTime bookingResponseTime = createBookingResponseTime(10, Duration.standardMinutes(5));
 
         // Act
-        Optional<Band> result = (Optional<Band>) selectBandMethod.invoke(autoBoostCalculationService, bands, bookingResponseTime);
+        Optional<Band> result = (Optional<Band>) selectBandMethod.invoke(autoBoostCalculationService, bands, bookingResponseTime, false);
 
         // Assert
         Assert.assertTrue(result.isEmpty(), "Should return empty Optional when band list is empty");

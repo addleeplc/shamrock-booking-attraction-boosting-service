@@ -115,6 +115,8 @@ public class StrategyService {
                     .stream()
                     .filter(it -> it.getBands() != null && it.getBands().getItems() != null)
                     .forEach(strategy -> strategy.getBands().getItems().sort(BAND_COMPARATOR));
+
+            return strategyMap;
         } catch (Exception e) {
             log.error("Error parsing strategies", e);
             return new HashMap<>();

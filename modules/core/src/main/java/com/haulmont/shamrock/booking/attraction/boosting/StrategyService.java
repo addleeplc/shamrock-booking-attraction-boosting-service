@@ -29,15 +29,14 @@ import java.util.stream.Stream;
 import static com.haulmont.shamrock.booking.attraction.boosting.config.ServiceConfiguration.BOOST_STRATEGIES_CONFIG_PROPERTY;
 import static com.haulmont.shamrock.booking.attraction.boosting.util.ScopeUtil.*;
 import static java.util.Collections.emptyList;
+import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.comparingLong;
 
 @Component
 public class StrategyService {
-    private static final Comparator<Band> BAND_COMPARATOR =
-            Comparator
-                    .comparingLong((Band b) -> b.getMinExtraResponseTime().toStandardSeconds().getSeconds())
-                    .reversed()
-                    .thenComparingInt(Band::getMinBookingPriority)
-                    .reversed();
+    private static final Comparator<Band> BAND_COMPARATOR = comparingLong((Band b) -> b.getMinExtraResponseTime().toStandardSeconds().getSeconds())
+            .reversed()
+            .thenComparing(comparingInt(Band::getMinBookingPriority).reversed());
 
     private static final ScopeType[] SCOPE_TYPES_RESOLUTION_SEQUENCE = new ScopeType[]{
             ScopeType.PRODUCT_GROUP,
@@ -112,7 +111,10 @@ public class StrategyService {
 
             resolveHierarchyFields(strategyMap, strategiesByScopeType, SCOPE_TYPES_RESOLUTION_SEQUENCE);
 
-            return strategyMap;
+            strategyMap.values()
+                    .stream()
+                    .filter(it -> it.getBands() != null && it.getBands().getItems() != null)
+                    .forEach(strategy -> strategy.getBands().getItems().sort(BAND_COMPARATOR));
         } catch (Exception e) {
             log.error("Error parsing strategies", e);
             return new HashMap<>();
@@ -173,11 +175,11 @@ public class StrategyService {
                     } else {
                         Strategy existingStrategy = strategyMap.get(regionProductStrategy.getScope());
 
-                        if(!existingStrategy.hasBands()) {
+                        if (!existingStrategy.hasBands()) {
                             existingStrategy.setBands(strategy.hasBands() ? strategy.getBands() : productStrategy.getBands());
                         }
 
-                        if(strategy.getCaps() != null) {
+                        if (strategy.getCaps() != null) {
                             existingStrategy.setCaps(mergeCaps(existingStrategy.getCaps(), strategy.getCaps()));
                         }
                         existingStrategy.setCaps(mergeCaps(existingStrategy.getCaps(), productStrategy.getCaps()));
@@ -213,8 +215,6 @@ public class StrategyService {
         } else {
             throw new IllegalArgumentException("Unknown scope type: " + scopeType);
         }
-
-        strategy.getBands().getItems().sort(BAND_COMPARATOR);
     }
 
     //todo copy?

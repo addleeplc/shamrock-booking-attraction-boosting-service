@@ -23,6 +23,9 @@ import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.haulmont.monaco.unirest.ServiceCallUtils.call;
+import static com.haulmont.monaco.unirest.ServiceCallUtils.extract;
+
 @Component
 public class BookingCacheService {
     @Inject
@@ -34,9 +37,9 @@ public class BookingCacheService {
                 productIds,
                 now.plus(serviceConfiguration.getUpcomingBookingsLoadingPeriod()));
 
-        Function<BookingsResponse, List<Booking>> bookingsExtractor = response -> ServiceCallUtils.extract(response, BookingsResponse::getBookings);
+        Function<BookingsResponse, List<Booking>> bookingsExtractor = response -> extract(response, BookingsResponse::getBookings);
 
-        return ServiceCallUtils.call(bookingsResponseSupplier, bookingsExtractor);
+        return call(bookingsResponseSupplier, bookingsExtractor);
     }
 
     public static class LoadActiveBookingsCommand extends UnirestCommand<BookingsResponse> {
@@ -63,6 +66,7 @@ public class BookingCacheService {
                     .queryString("execution_status", ExecutionStatus.WAITING_ALLOC)
                     .queryString("execution_status", ExecutionStatus.CONFIRMED)
                     .queryString("supplier_is_null", "")
+                    .queryString("asap", false)
                     .queryString("driver_is_null", "")
                     .queryString("cancellation_date_is_null", "")
                     .queryString("prebooked_by_driver.id_is_null", "")
